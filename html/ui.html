@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stomach Growl</title>
+</head>
+<body>
+    <audio id="growl" src="nui://pm_growlsound/html/sounds/stomach_growl.ogg"></audio>
+    <script>
+        window.addEventListener('message', async function(event) {
+            if (event.data.transactionType === 'playSound') {
+                let sound = document.getElementById('growl');
+                sound.volume = event.data.transactionVolume;
+
+                try {
+                    await sound.play();
+                } catch (error) {
+                    console.error('Failed to play audio:', error);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
